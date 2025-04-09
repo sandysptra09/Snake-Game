@@ -35,7 +35,7 @@ A simple mini project that simulates a text-based Snake game on a terminal/conso
 
 ## 📜 License
 
-MIT License – free to use for educational and development purposes.
+MIT License – free to use for educational and development purposes!
 
 ---
 
