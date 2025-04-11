@@ -39,4 +39,4 @@ MIT License – free to use for educational and development purposes.
 
 ---
 
-> 💡 _"Coding is not just about syntax, it's about logic and creativity."_
+> 💡 _"Coding is not just about syntax, it's about logic and creativity. (Sandy Saputra)"_
