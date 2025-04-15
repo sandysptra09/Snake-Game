@@ -4,7 +4,7 @@
 #include <windows.h>
 using namespace std;
 
-const char* fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; //array
+const char *fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; // array
 
 void Setup(Snake *s)
 {
@@ -15,21 +15,28 @@ void Setup(Snake *s)
     s->fruitX = rand() % 20;
     s->fruitY = rand() % 20;
     s->score = 0;
-    s->tail = nullptr;      // Inisialisasi tail sebagai linked list kosong
+    s->tail = nullptr; // Inisialisasi tail sebagai linked list kosong
     s->tailLength = 0;
 }
 
 void Draw(Snake *s, int frameCount)
 {
+    // Handle Console (Text Attribute)
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
     // Clear layar
     system("cls");
 
-    for (int i = 0; i < 20; i++)
+    // Border Atas
+    for (int i = 0; i < 42; i++)
+        cout << "#";
+    cout << endl;
+
+    for (int i = 0; i < 22; i++)
     { // Loop untuk menggambar baris
-        for (int j = 0; j < 20; j++)
+        for (int j = 0; j < 22; j++)
         {                          // Loop untuk menggambar kolom
-            if (j == 0 || j == 19) // Gambar dinding di sisi kiri dan kanan
+            if (j == 0 || j == 21) // Gambar dinding di sisi kiri dan kanan
                 cout << "#";
             else if (i == s->y && j == s->x) // Gambar kepala ular
                 cout << "O ";
@@ -53,13 +60,19 @@ void Draw(Snake *s, int frameCount)
                 if (!printed)
                     cout << "  "; // Kosongkan jika tidak ada segmen tail di posisi itu
             }
-            if (j == 19)
-                cout << "#"; // Gambar dinding bawah
         }
         cout << endl;
     }
 
+    // Border Bawah
+    for (int i = 0; i < 42; i++)
+        cout << "#";
+    cout << endl;
     cout << "Score: " << s->score << endl; // Tampilkan skor
+    cout << endl;
+    SetConsoleTextAttribute(hConsole, 12);
+    cout << "Press X to Exit The Game" << endl;
+    SetConsoleTextAttribute(hConsole, 7);
 }
 // Fungsi untuk menangani input dari pemain
 void Input(Snake *s)

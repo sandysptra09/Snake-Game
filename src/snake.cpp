@@ -1,5 +1,6 @@
 #include "snake.h"
 #include <cstdlib>
+using namespace std;
 
 // nambahahin segment tail baru ke linked list
 void AddTailSegment(Snake *s, int newX, int newY)
