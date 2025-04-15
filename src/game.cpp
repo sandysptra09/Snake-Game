@@ -12,8 +12,8 @@ void Setup(Snake *s)
     s->dir = RIGHT;
     s->x = 10;
     s->y = 10;
-    s->fruitX = rand() % 20;
-    s->fruitY = rand() % 20;
+    s->fruitX = rand() % 18;
+    s->fruitY = rand() % 18;
     s->score = 0;
     s->tail = nullptr; // Inisialisasi tail sebagai linked list kosong
     s->tailLength = 0;

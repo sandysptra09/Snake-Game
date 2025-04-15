@@ -1,5 +1,6 @@
 #include "snake.h"
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
 
 // nambahahin segment tail baru ke linked list
@@ -25,8 +26,10 @@ void AddTailSegment(Snake *s, int newX, int newY)
             current = current->next;
         }
         current->next = newNode;
+        Beep(1000, 100);
     }
     s->tailLength++;
+
 }
 
 // ngehapus semua node di linked list tail
