@@ -6,14 +6,24 @@ using namespace std;
 
 const char *fruitEmoji[] = {"🍎", "🍌", "🍇", "🍓", "🍉", "🍍"};
 
+void MoveFruit(Snake *s, int frameCount)
+{
+    // Gerakkan buah setiap beberapa frame
+    if (frameCount % 10 == 0)
+    {                                // Setiap 10 frame (bisa diubah)
+        s->fruitX = 1 + rand() % 18; // Posisi X buah
+        s->fruitY = 1 + rand() % 18; // Posisi Y buah
+    }
+}
+
 void Setup(Snake *s)
 {
     s->gameOver = false;
     s->dir = RIGHT;
     s->x = 10;
     s->y = 10;
-    s->fruitX = rand() % 18;
-    s->fruitY = rand() % 18;
+    s->fruitX = 1 + rand() % 18;
+    s->fruitY = 1 + rand() % 18;
     s->score = 0;
     s->tail = nullptr; // Inisialisasi tail sebagai linked list kosong
     s->tailLength = 0;
@@ -82,16 +92,20 @@ void Input(Snake *s)
         switch (_getch())
         {
         case 'a':
-            s->dir = LEFT;
+            if (s->dir != RIGHT)
+                s->dir = LEFT;
             break;
         case 'd':
-            s->dir = RIGHT;
+            if (s->dir != LEFT)
+                s->dir = RIGHT;
             break;
         case 'w':
-            s->dir = UP;
+            if (s->dir != DOWN)
+                s->dir = UP;
             break;
         case 's':
-            s->dir = DOWN;
+            if (s->dir != UP)
+                s->dir = DOWN;
             break;
         case 'x':
             s->gameOver = true;
@@ -126,14 +140,14 @@ void Logic(Snake *s, bool &scored)
         break;
     }
 
-    if (s->x >= 20)
-        s->x = 0;
+    if (s->x >= 21)
+        s->gameOver = true;
     if (s->x < 0)
-        s->x = 19;
-    if (s->y >= 20)
-        s->y = 0;
+        s->gameOver = true;
+    if (s->y >= 21)
+        s->gameOver = true;
     if (s->y < 0)
-        s->y = 19;
+        s->gameOver = true;
 
     // Update posisi tail
     TailNode *current = s->tail;
@@ -164,8 +178,8 @@ void Logic(Snake *s, bool &scored)
     if (s->x == s->fruitX && s->y == s->fruitY)
     {
         s->score += 10;
-        s->fruitX = rand() % 20;
-        s->fruitY = rand() % 20;
+        s->fruitX = 1 + rand() % 18;
+        s->fruitY = 1 + rand() % 18;
         AddTailSegment(s, prevX, prevY); // Tambah segmen baru
         scored = true;
     }
