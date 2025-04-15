@@ -4,7 +4,7 @@
 #include <windows.h>
 using namespace std;
 
-const char *fruitEmoji[] = {"🍎", "🍌", "🍇", "🍓", "🍉", "🍍"};
+const char *fruitEmoji[] = {"¤", "ø", "×", "♦", "♣", "♠", "☼"};
 
 void Setup(Snake *s)
 {
@@ -48,9 +48,9 @@ void Draw(Snake *s, int frameCount)
             // ngegambar kepala ular
             else if (i == s->y && j == s->x)
             {
-                SetConsoleTextAttribute(hConsole,10);
+                SetConsoleTextAttribute(hConsole, 10);
                 cout << "O ";
-                SetConsoleTextAttribute(hConsole,7);
+                SetConsoleTextAttribute(hConsole, 7);
             }
             else if (i == s->fruitY && j == s->fruitX)
             {
@@ -66,16 +66,17 @@ void Draw(Snake *s, int frameCount)
                 {
                     if (current->x == j && current->y == i)
                     {
-                        SetConsoleTextAttribute(hConsole,2);
+                        SetConsoleTextAttribute(hConsole, 2);
                         cout << "o ";
-                        SetConsoleTextAttribute(hConsole,7);
+                        SetConsoleTextAttribute(hConsole, 7);
                         printed = true;
                         break;
                     }
                     current = current->next;
                 }
                 // kosongin kalo ga ada segmen tail di posisi itu
-                if (!printed){
+                if (!printed)
+                {
                     cout << "  ";
                 }
             }
@@ -199,7 +200,8 @@ void Logic(Snake *s, bool &scored)
         scored = true;
     }
 
-    if (s-> gameOver == true){
+    if (s->gameOver == true)
+    {
         Beep(1000, 100);
     }
 }
