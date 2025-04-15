@@ -29,3 +29,37 @@ void Setup(Snake *s)
     // tidak ada tail
     s->nTail = 0;
 }
+
+void Draw(Snake* s, int frameCount) {
+    system("cls");  // Clear layar
+
+    for (int i = 0; i < 20; i++) { // Loop untuk menggambar baris
+        for (int j = 0; j < 20; j++) { // Loop untuk menggambar kolom
+            if (j == 0 || j == 19) // Gambar dinding di sisi kiri dan kanan
+                cout << "#";
+            else if (i == s->y && j == s->x) // Gambar kepala ular
+                cout << "O ";
+            else if (i == s->fruitY && j == s->fruitX) // Gambar buah
+                cout << "F ";
+            else {
+                bool printed = false;
+                TailNode* current = s->tail;
+                // Traversal linked list untuk menggambar tail
+                while (current != nullptr) {
+                    if (current->x == j && current->y == i) {
+                        cout << "o ";
+                        printed = true;
+                        break;
+                    }
+                    current = current->next;
+                }
+                if (!printed)
+                    cout << "  "; // Kosongkan jika tidak ada segmen tail di posisi itu
+            }
+            if (j == 19) cout << "#"; // Gambar dinding bawah
+        }
+        cout << endl;
+    }
+
+    cout << "Score: " << s->score << endl; // Tampilkan skor
+}
