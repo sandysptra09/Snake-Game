@@ -6,26 +6,18 @@ using namespace std;
 
 const char *fruitEmoji[] = {"🍎", "🍌", "🍇", "🍓", "🍉", "🍍"};
 
-void MoveFruit(Snake *s, int frameCount)
-{
-    // Gerakkan buah setiap beberapa frame
-    if (frameCount % 10 == 0)
-    {                            // Setiap 10 frame (bisa diubah)
-        s->fruitX = rand() % 20; // Posisi X buah
-        s->fruitY = rand() % 20; // Posisi Y buah
-    }
-}
-
 void Setup(Snake *s)
 {
     s->gameOver = false;
     s->dir = RIGHT;
     s->x = 10;
     s->y = 10;
-    s->fruitX = rand() % 20;
-    s->fruitY = rand() % 20;
+    s->fruitX = 1 + rand() % 18;
+    s->fruitY = 1 + rand() % 18;
     s->score = 0;
-    s->tail = nullptr; // Inisialisasi tail sebagai linked list kosong
+
+    // inisialisasi tail ngejadiin linked list kosong
+    s->tail = nullptr;
     s->tailLength = 0;
 }
 
@@ -34,57 +26,76 @@ void Draw(Snake *s, int frameCount)
     // Handle Console (Text Attribute)
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    // Clear layar
+    // bersihin layar
     system("cls");
 
-    // Border Atas
+    // border atas
     for (int i = 0; i < 42; i++)
         cout << "#";
     cout << endl;
 
     for (int i = 0; i < 22; i++)
-    { // Loop untuk menggambar baris
+    {
+        // loop buat ngegambar baris
         for (int j = 0; j < 22; j++)
-        {                          // Loop untuk menggambar kolom
-            if (j == 0 || j == 21) // Gambar dinding di sisi kiri dan kanan
+        {
+            // loop buat ngegambar kolom
+
+            // ngegambar dinding di sisi kiri dan kanan
+            if (j == 0 || j == 21)
                 cout << "#";
-            else if (i == s->y && j == s->x) // Gambar kepala ular
+
+            // ngegambar kepala ular
+            else if (i == s->y && j == s->x)
+            {
+                SetConsoleTextAttribute(hConsole,10);
                 cout << "O ";
+                SetConsoleTextAttribute(hConsole,7);
+            }
             else if (i == s->fruitY && j == s->fruitX)
+            {
                 cout << fruitEmoji[s->score % 6] << " ";
+            }
             else
             {
                 bool printed = false;
                 TailNode *current = s->tail;
-                // Traversal linked list untuk menggambar tail
+
+                // traversal linked list buat ngegambar tail
                 while (current != nullptr)
                 {
                     if (current->x == j && current->y == i)
                     {
+                        SetConsoleTextAttribute(hConsole,2);
                         cout << "o ";
+                        SetConsoleTextAttribute(hConsole,7);
                         printed = true;
                         break;
                     }
                     current = current->next;
                 }
+                cout << "  ";
+                // kosongin kalo ga ada segmen tail di posisi itu
                 if (!printed)
-                    cout << "  "; // Kosongkan jika tidak ada segmen tail di posisi itu
             }
         }
         cout << endl;
     }
 
-    // Border Bawah
+    // border bawah
     for (int i = 0; i < 42; i++)
         cout << "#";
     cout << endl;
-    cout << "Score: " << s->score << endl; // Tampilkan skor
+
+    // tampilin skor
+    cout << "Score: " << s->score << endl;
     cout << endl;
+
     SetConsoleTextAttribute(hConsole, 12);
     cout << "Press X to Exit The Game" << endl;
     SetConsoleTextAttribute(hConsole, 7);
 }
-// Fungsi untuk menangani input dari pemain
+// fungsi buat nanganin input dari pemain
 void Input(Snake *s)
 {
     if (_kbhit())
@@ -92,16 +103,20 @@ void Input(Snake *s)
         switch (_getch())
         {
         case 'a':
-            s->dir = LEFT;
+            if (s->dir != RIGHT)
+                s->dir = LEFT;
             break;
         case 'd':
-            s->dir = RIGHT;
+            if (s->dir != LEFT)
+                s->dir = RIGHT;
             break;
         case 'w':
-            s->dir = UP;
+            if (s->dir != DOWN)
+                s->dir = UP;
             break;
         case 's':
-            s->dir = DOWN;
+            if (s->dir != UP)
+                s->dir = DOWN;
             break;
         case 'x':
             s->gameOver = true;
@@ -110,16 +125,17 @@ void Input(Snake *s)
     }
 }
 
-// Fungsi untuk mengelola logika permainan
+// fungsi buat ngelola logika permainan
 void Logic(Snake *s, bool &scored)
 {
     scored = false;
 
-    // Simpan posisi kepala sebelum bergerak
+    // simpan posisi kepala sebelum bergerak
     int prevX = s->x;
     int prevY = s->y;
     int prev2X, prev2Y;
-    // Update posisi kepala berdasarkan arah
+
+    // update posisi kepala berdasarkan arah
     switch (s->dir)
     {
     case LEFT:
@@ -136,16 +152,16 @@ void Logic(Snake *s, bool &scored)
         break;
     }
 
-    if (s->x >= 20)
-        s->x = 0;
+    if (s->x >= 21)
+        s->gameOver = true;
     if (s->x < 0)
-        s->x = 19;
-    if (s->y >= 20)
-        s->y = 0;
+        s->gameOver = true;
+    if (s->y >= 21)
+        s->gameOver = true;
     if (s->y < 0)
-        s->y = 19;
+        s->gameOver = true;
 
-    // Update posisi tail
+    // update posisi tail
     TailNode *current = s->tail;
     while (current != nullptr)
     {
@@ -158,7 +174,7 @@ void Logic(Snake *s, bool &scored)
         current = current->next;
     }
 
-    // Cek tabrakan dengan tail
+    // cek tabrakan dengan tail
     current = s->tail;
     while (current != nullptr)
     {
@@ -170,13 +186,15 @@ void Logic(Snake *s, bool &scored)
         current = current->next;
     }
 
-    // Cek apakah kepala ular menyentuh buah
+    // cek apakah kepala ular menyentuh buah
     if (s->x == s->fruitX && s->y == s->fruitY)
     {
         s->score += 10;
-        s->fruitX = rand() % 20;
-        s->fruitY = rand() % 20;
-        AddTailSegment(s, prevX, prevY); // Tambah segmen baru
+        s->fruitX = 1 + rand() % 18;
+        s->fruitY = 1 + rand() % 18;
+
+        // tambah segmen baru
+        AddTailSegment(s, prevX, prevY);
         scored = true;
     };
 };
