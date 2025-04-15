@@ -8,40 +8,48 @@
 #include <thread>
 using namespace std;
 
-void TypeOut(const std::string& text, int delayMs = 30) {
-    for (char c : text) {
+void TypeOut(const string &text, int delayMs = 30)
+{
+    for (char c : text)
+    {
         cout << c << flush;
         Sleep(delayMs);
     }
     cout << endl;
 }
 
-void ShowGameOverScreen(int score, int highscore, bool isHighscore) {
+void ShowGameOverScreen(int score, int highscore, bool isHighscore)
+{
     system("cls");
     string border = "==============================";
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++)
+    {
         system("cls");
-        cout << endl << border << endl;
+        cout << endl
+             << border << endl;
         cout << "  ❌  G A M E   O V E R  ❌" << endl;
         cout << border << endl;
-        
 
         system("cls");
-        cout << endl << border << endl;
+        cout << endl
+             << border << endl;
         cout << "                              " << endl;
         cout << border << endl;
-        
     }
 
     system("cls");
-    cout << endl << border << endl;
+    cout << endl
+         << border << endl;
     cout << "  ❌  G A M E   O V E R  ❌" << endl;
     cout << border << endl;
 
-    if (isHighscore) {
+    if (isHighscore)
+    {
         TypeOut("🎉 New Highscore: " + to_string(score) + " 🎉", 40);
-    } else {
+    }
+    else
+    {
         TypeOut("💀 Your Score   : " + to_string(score), 40);
         TypeOut("🏆 Highscore    : " + to_string(highscore), 40);
     }
@@ -49,7 +57,8 @@ void ShowGameOverScreen(int score, int highscore, bool isHighscore) {
     cout << border << endl;
 }
 
-void ShowMainMenu() {
+void ShowMainMenu()
+{
     SetConsoleOutputCP(CP_UTF8);
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -65,7 +74,8 @@ void ShowMainMenu() {
 
     bool show = true;
     int blinkCounter = 0;
-    while (!_kbhit()) {
+    while (!_kbhit())
+    {
         system("cls");
         SetConsoleTextAttribute(hConsole, 11);
         cout << string(paddingLeft, ' ') << title1 << endl;
@@ -75,21 +85,24 @@ void ShowMainMenu() {
         SetConsoleTextAttribute(hConsole, 7);
         cout << endl;
 
-        if (blinkCounter % 10 < 5) {
+        if (blinkCounter % 10 < 5)
+        {
             SetConsoleTextAttribute(hConsole, 14);
             cout << string(centerOffset, ' ') << "Press any key to play..." << endl;
             SetConsoleTextAttribute(hConsole, 7);
-        } else {
+        }
+        else
+        {
             cout << endl;
         }
 
-        
         blinkCounter++;
     }
     _getch();
 }
 
-int main(){
+int main()
+{
     ShowMainMenu();
 
     Snake snake;
@@ -99,7 +112,8 @@ int main(){
     int frameCount = 0;
     bool scored = false;
 
-    while (!snake.gameOver) {
+    while (!snake.gameOver)
+    {
         Draw(&snake, frameCount);
         Input(&snake);
         Logic(&snake, scored);
@@ -108,13 +122,14 @@ int main(){
     }
 
     FreeTail(&snake);
-    
+
     bool isHigh = false;
-    if (snake.score > highscore) {
+    if (snake.score > highscore)
+    {
         SaveHighScore("assets/highscore.txt", snake.score);
         isHigh = true;
     }
-    
+
     ShowGameOverScreen(snake.score, highscore, isHigh);
     cout << "Game Over!" << endl;
     system("pause");
