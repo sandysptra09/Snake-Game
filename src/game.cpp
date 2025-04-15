@@ -96,7 +96,7 @@ void Draw(Snake *s, int frameCount)
     SetConsoleTextAttribute(hConsole, 12);
     cout << "Press X to Exit The Game" << endl;
     SetConsoleTextAttribute(hConsole, 7);
-}
+};
 // fungsi buat nanganin input dari pemain
 void Input(Snake *s)
 {
