@@ -178,6 +178,5 @@ void Logic(Snake *s, bool &scored)
         s->fruitY = rand() % 20;
         AddTailSegment(s, prevX, prevY); // Tambah segmen baru
         scored = true;
-    }
+    };
 };
-
