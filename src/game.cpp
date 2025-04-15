@@ -4,15 +4,28 @@
 #include <windows.h>
 using namespace std;
 
-// Fungsi Setup untuk inisialisasi permainan
-void Setup(Snake* s) {
+// fungsi Setup untuk inisialisasi permainan
+void Setup(Snake *s)
+{
     s->gameOver = false;
-    s->dir = RIGHT;        // Mulai bergerak ke kanan
-    s->x = 10;             // Posisi kepala ular
+
+    // mulai bergerak ke kanan
+    s->dir = RIGHT;
+
+    // posisi kepala ular
+    s->x = 10;
     s->y = 10;
-    s->fruitX = rand() % 20;  // Posisi buah
+
+    // posisi buah
+    s->fruitX = rand() % 20;
     s->fruitY = rand() % 20;
-    s->score = 0;              // Skor awal
-    s->tail = nullptr;         // Tail kosong
-    s->nTail = 0;              // Tidak ada tail
+
+    // skor awal
+    s->score = 0;
+
+    // tail kosong
+    s->tail = nullptr;
+
+    // tidak ada tail
+    s->nTail = 0;
 }
