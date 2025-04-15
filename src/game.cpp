@@ -4,7 +4,7 @@
 #include <windows.h>
 using namespace std;
 
-const char* fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; //array
+const char *fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; // array
 
 void Setup(Snake *s)
 {
