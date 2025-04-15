@@ -6,16 +6,6 @@ using namespace std;
 
 const char *fruitEmoji[] = {"🍎", "🍌", "🍇", "🍓", "🍉", "🍍"};
 
-void MoveFruit(Snake *s, int frameCount)
-{
-    // Gerakkan buah setiap beberapa frame
-    if (frameCount % 10 == 0)
-    {                            // Setiap 10 frame (bisa diubah)
-        s->fruitX = rand() % 20; // Posisi X buah
-        s->fruitY = rand() % 20; // Posisi Y buah
-    }
-}
-
 void Setup(Snake *s)
 {
     s->gameOver = false;
