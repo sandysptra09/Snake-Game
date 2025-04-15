@@ -179,5 +179,5 @@ void Logic(Snake *s, bool &scored)
         AddTailSegment(s, prevX, prevY); // Tambah segmen baru
         scored = true;
     }
-}
+};
 
