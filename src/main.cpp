@@ -103,6 +103,7 @@ void ShowMainMenu()
 
 int main()
 {
+
     ShowMainMenu();
 
     Snake snake;
