@@ -2,12 +2,16 @@
 #define GAME_H
 #include "snake.h"
 
-void Setup(Snake* snake);
+// fungsi Setup buat inisialisasi permainan
+void Setup(Snake *snake);
 
-void Draw(Snake* snake, int frameCount);
+// fungsi Draw buat ngegambar permainan
+void Draw(Snake *snake, int frameCount);
 
-void Input(Snake* snake);
+// fungsi Input buat ngecek input dari user
+void Input(Snake *snake);
 
-void Logic(Snake* snake, bool& scored);
+// fungsi Logic buat ngelakuin logika permainan
+void Logic(Snake *snake, bool &scored);
 
 #endif
