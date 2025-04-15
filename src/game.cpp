@@ -4,7 +4,7 @@
 #include <windows.h>
 using namespace std;
 
-const char* fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; //array
+const char *fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; // array
 
 void Setup(Snake *s)
 {
@@ -15,7 +15,7 @@ void Setup(Snake *s)
     s->fruitX = rand() % 20;
     s->fruitY = rand() % 20;
     s->score = 0;
-    s->tail = nullptr;      // Inisialisasi tail sebagai linked list kosong
+    s->tail = nullptr; // Inisialisasi tail sebagai linked list kosong
     s->tailLength = 0;
 }
 
@@ -63,14 +63,14 @@ void Draw(Snake *s, int frameCount)
         }
         cout << endl;
     }
-    
+
     // Border Bawah
     for (int i = 0; i < 42; i++)
         cout << "#";
     cout << endl;
     cout << "Score: " << s->score << endl; // Tampilkan skor
     cout << endl;
-    SetConsoleTextAttribute(hConsole,12);
+    SetConsoleTextAttribute(hConsole, 12);
     cout << "Press X to Exit The Game" << endl;
     SetConsoleTextAttribute(hConsole, 7);
 }
