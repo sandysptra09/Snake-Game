@@ -40,12 +40,3 @@ MIT License – free to use for educational and development purposes.
 ---
 
 > 💡 _"Coding is not just about syntax, it's about logic and creativity."_
-
-<<<<<<< HEAD
-
-ini coba dulu
-
-add branch (test)
-=======
-coba ngepush
->>>>>>> 4cd4ed664827590dbfff04a51f0ed66ab2ee5f98
