@@ -47,9 +47,15 @@ void Draw(Snake *s, int frameCount)
 
             // ngegambar kepala ular
             else if (i == s->y && j == s->x)
+            {
+                SetConsoleTextAttribute(hConsole,10);
                 cout << "O ";
+                SetConsoleTextAttribute(hConsole,7);
+            }
             else if (i == s->fruitY && j == s->fruitX)
+            {
                 cout << fruitEmoji[s->score % 6] << " ";
+            }
             else
             {
                 bool printed = false;
@@ -60,7 +66,9 @@ void Draw(Snake *s, int frameCount)
                 {
                     if (current->x == j && current->y == i)
                     {
+                        SetConsoleTextAttribute(hConsole,2);
                         cout << "o ";
+                        SetConsoleTextAttribute(hConsole,7);
                         printed = true;
                         break;
                     }
