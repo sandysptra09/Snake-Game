@@ -99,7 +99,7 @@ void ShowMainMenu()
         blinkCounter++;
     }
     _getch();
-}
+};
 
 int main()
 {
@@ -134,4 +134,4 @@ int main()
     cout << "Game Over!" << endl;
     system("pause");
     return 0;
-}
+};
