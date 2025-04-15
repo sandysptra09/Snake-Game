@@ -1,5 +1,6 @@
 #include "snake.h"
 #include <cstdlib>
+#include <windows.h>
 using namespace std;
 
 // nambahahin segment tail baru ke linked list
