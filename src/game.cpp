@@ -180,3 +180,4 @@ void Logic(Snake *s, bool &scored)
         scored = true;
     }
 }
+
