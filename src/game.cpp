@@ -74,9 +74,10 @@ void Draw(Snake *s, int frameCount)
                     }
                     current = current->next;
                 }
-                cout << "  ";
                 // kosongin kalo ga ada segmen tail di posisi itu
-                if (!printed)
+                if (!printed){
+                    cout << "  ";
+                }
             }
         }
         cout << endl;
@@ -196,5 +197,9 @@ void Logic(Snake *s, bool &scored)
         // tambah segmen baru
         AddTailSegment(s, prevX, prevY);
         scored = true;
-    };
-};
+    }
+
+    if (s-> gameOver == true){
+        Beep(1000, 100);
+    }
+}
