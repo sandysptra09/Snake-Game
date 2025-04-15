@@ -29,7 +29,6 @@ void AddTailSegment(Snake *s, int newX, int newY)
         Beep(1000, 100);
     }
     s->tailLength++;
-
 }
 
 // ngehapus semua node di linked list tail
