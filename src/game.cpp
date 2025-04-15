@@ -4,7 +4,8 @@
 #include <windows.h>
 using namespace std;
 
-// fungsi Setup untuk inisialisasi permainan
+const char* fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; //array
+
 void Setup(Snake *s)
 {
     s->gameOver = false;
