@@ -4,7 +4,17 @@
 #include <windows.h>
 using namespace std;
 
-const char *fruitOptions[] = {"F", "R", "U", "I", "T", "S"}; // array
+const char *fruitEmoji[] = {"🍎", "🍌", "🍇", "🍓", "🍉", "🍍"};
+
+void MoveFruit(Snake *s, int frameCount)
+{
+    // Gerakkan buah setiap beberapa frame
+    if (frameCount % 10 == 0)
+    {                            // Setiap 10 frame (bisa diubah)
+        s->fruitX = rand() % 20; // Posisi X buah
+        s->fruitY = rand() % 20; // Posisi Y buah
+    }
+}
 
 void Setup(Snake *s)
 {
@@ -40,8 +50,8 @@ void Draw(Snake *s, int frameCount)
                 cout << "#";
             else if (i == s->y && j == s->x) // Gambar kepala ular
                 cout << "O ";
-            else if (i == s->fruitY && j == s->fruitX) // Gambar buah
-                cout << "F ";
+            else if (i == s->fruitY && j == s->fruitX)
+                cout << fruitEmoji[s->score % 6] << " ";
             else
             {
                 bool printed = false;
